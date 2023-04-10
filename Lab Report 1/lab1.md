@@ -20,7 +20,7 @@ This is one of the parts that I skipped entirely. This is entirely because of th
 2. After downloaded, open the installer and just follow the instructions given, like agreeing to the terms and conditions.
 3. There are more settings that can be chosen in the installation, but the default options seemed good enough.
 
-    ![image](https://user-images.githubusercontent.com/108056736/230704835-2f7ee270-5e8b-4bff-8da3-33bd094762f3.png)
+    ![image](1-2.png)
   
 5. Open VSCode and it's ready to go.
 
@@ -30,12 +30,12 @@ Before being able to connect, you should first set up your CSE 15L account's pas
 1. https://sdacs.ucsd.edu/~icc/index.php go to this link and log in with your UCSD username and PID in the "Account Lookup" section.
 2. Next, look to the "Additional Accounts" section of the page and click the button of your course account (as exemplified below).
 
-   ![image](https://user-images.githubusercontent.com/108056736/230704977-3bb95f46-7de3-41fc-a329-93b0f1c0fdf2.png)
+   ![image](1-3.png)
   
 3. Copy the username, and proceed with the "Global Password Change Tool" link, and then select "Proceed to the Password Change Tool" on the next page.
 4. Input said copied username and click continue.
   
-   ![image](https://user-images.githubusercontent.com/108056736/230705076-607855c5-e0a6-43d9-b576-7057d20602e7.png)
+   ![image](1-4.png)
   
 6. Click the reset password button. You will be prompted to confirm using Duo.
 7. You will be asked if you would want to be emailed (in your main UCSD account) to reset the password. Click yes and then click the link that's sent to your email and input your desired password.
@@ -46,7 +46,7 @@ Next, before we can connect to the ssh, we need to set up git for the PC as a wh
 3. Open Visual Studio Code, and open Terminal. You can input `` Ctrl + ` `` on your keyboard to do this.
 4. Next, input `Ctrl + Shift + P` in your keyboard to open the command palette and select (or search) "Terminal: Select Default Profile" like so.
 
-   ![image](https://user-images.githubusercontent.com/108056736/230705544-af97f19d-1a3c-4845-9eba-d5dbc46e6744.png)
+   ![image](1-5.png)
   
 5. Select "Git Bash".
 6. Input `` Ctrl + Shift + ` `` in your keyboard to open a new terminal which would be in Git bash.
@@ -54,11 +54,11 @@ Next, before we can connect to the ssh, we need to set up git for the PC as a wh
 Finally, we're ready to actually connect to the ssh... if the server was actually working when I was in my lab session. Instead, I will simply show my workaround during the session using my UCSD email instead. However, if this problem is also happening in the future, the other workaround is by adding -202 after ieng6 in your username.
 1. Enter to the terminal `ssh <your course username>@ieng6.ucsd.edu`. There will be a disclaimer that looks something like this that you can just answer yes.
   
-    ![image](https://user-images.githubusercontent.com/108056736/230706291-930a9c4f-b058-4c83-aa30-2d28d152c744.png)
+    ![image](1-6.png)
   
 2. It will then prompt a password input. Type your password in nevertheless the fact that you can't see any of the keys you typed in. This was apparently a security measure, and your password will still be typed and be inputted once you hit enter.
   
-    ![image](https://user-images.githubusercontent.com/108056736/230706730-50e2baf0-8f72-4321-8ef5-63d2a6819530.png)
+    ![image](1-7.png)
   
 3. You have now enterred the ssh in the ~ or home directory of your username.
 
@@ -67,11 +67,11 @@ Finally, we're ready to actually connect to the ssh... if the server was actuall
 Now that we're already in the server, let's try out some commands.
 Here are some of the commands that the professor provided as examples:
 
-![image](https://user-images.githubusercontent.com/108056736/230707208-51e84a21-6357-4152-abc2-69ec715c15c7.png)
+![image](1-8.png)
 
 To input the commands, simply type them and hit enter on the terminal. Below is an example snipet of what I did during the lab.
 
-![image](https://user-images.githubusercontent.com/108056736/230707550-7c636f14-0fbf-4f84-ae78-9612e929cf16.png)
+![image](1-9.png)
 
 Here are my general explanations as to what the commands I entered did:
 - cd switches the current working directory to the directory location given afterward
@@ -82,9 +82,8 @@ Here are my general explanations as to what the commands I entered did:
 
 I also tried other codes after the lab session using the -202 workaround.
 
-![image](https://user-images.githubusercontent.com/108056736/230708475-1c03b9e7-73ed-42e4-9574-e76906df7822.png)
-![image](https://user-images.githubusercontent.com/108056736/230708508-3499acf6-2000-42ac-bfd0-9d71c01d68f1.png)
-![image](https://user-images.githubusercontent.com/108056736/230708659-ecaa45f6-8eb8-49db-be38-bb4db70429a4.png)
+![image](1-10.png)
+![image](1-11.png)
 
 I am not sure about what ls -a and ls -lat do, but I know they're listing files. The command cp I inputted copies the "hello.txt" file in the public folder and pastes it inside my current directory (which was ~). The cat command prints the content inside "hello.txt".
 
