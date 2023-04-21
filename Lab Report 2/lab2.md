@@ -86,15 +86,23 @@ public class ListTests {
 	public void testMerge() {
         List<String> input1 = new ArrayList<>();
         input1.add("a");
-        input1.add("a");
-        input1.add("a");
+        input1.add("g");
+        input1.add("z");
 
         List<String> input2 = new ArrayList<>();
-        input2.add("abcdef");
-        input2.add("abc");
-        input2.add("a");
+        input2.add("d");
+        input2.add("e");
+        input2.add("f");
+
+        List<String> ex = new ArrayList<>();
+        ex.add("a");
+        ex.add("d");
+        ex.add("e");
+        ex.add("f");
+        ex.add("g");
+        ex.add("z");
   
-        assertEquals(new ArrayList<>(), ListExamples.merge(input1, input2));
+        assertEquals(ex, ListExamples.merge(input1, input2));
 	}
 }
 ```
@@ -176,14 +184,137 @@ public class ListTests {
         
         assertEquals(test1, ListExamples.filter(input1, sc));
 	}
+...
+}
 ```
 
 3. The symptom of the code are that for `filter`, like mentioned before, `null` can't be used for the `sc` parameter, while no `StringChecker` has been implemented yet; OR, for the extra that has already implemented one, the order of the list will be in reverse (list returned not following the expected). Meanwhile, for `merge`, the terminal will run forever, not allowing any test to result. The output of the JUnit code can be seen below.
-  - `filter` failure (because `null`)
-  
-  - `filter` failure (after the implementation of `StringChecker`)
+  - `filter` failure (because `null` can't be used for `checkString()`)
+  ![Image](Images/LE1.png)
+  - `filter` failure (after the implementation of `StringChecker`; because result isn't matching with expected)
+  ![Image](Images/filfl2.png)
   - `filter` success (after the implementation of `StringChecker`)
-  - `merge` failure
+  ![Image](Images/filsc.png)
+  - `merge` failure (because the while loop loops forever, memory error)
+  ![Image](Images/mrgfl.png)
   - `merge` success
+  ![Image](Images/mrgsc.png)
 
-4. 
+4. The bugged code before the fix:
+```
+import java.util.ArrayList;
+import java.util.List;
+
+interface StringChecker { boolean checkString(String s); }
+
+class ListExamples {
+
+  // Returns a new list that has all the elements of the input list for which
+  // the StringChecker returns true, and not the elements that return false, in
+  // the same order they appeared in the input list;
+  static List<String> filter(List<String> list, StringChecker sc) {
+    List<String> result = new ArrayList<>();
+    for(String s: list) {
+      if(sc.checkString(s)) {
+        result.add(0, s);
+      }
+    }
+    return result;
+  }
+
+
+  // Takes two sorted list of strings (so "a" appears before "b" and so on),
+  // and return a new list that has all the strings in both list in sorted order.
+  static List<String> merge(List<String> list1, List<String> list2) {
+    List<String> result = new ArrayList<>();
+    int index1 = 0, index2 = 0;
+    while(index1 < list1.size() && index2 < list2.size()) {
+      if(list1.get(index1).compareTo(list2.get(index2)) < 0) {
+        result.add(list1.get(index1));
+        index1 += 1;
+      }
+      else {
+        result.add(list2.get(index2));
+        index2 += 1;
+      }
+    }
+    while(index1 < list1.size()) {
+      result.add(list1.get(index1));
+      index1 += 1;
+    }
+    while(index2 < list2.size()) {
+      result.add(list2.get(index2));
+      index1 += 1;
+    }
+    return result;
+  }
+
+
+}
+```
+
+The fixed code (labeled for the explanation):
+```
+import java.util.ArrayList;
+import java.util.List;
+
+interface StringChecker { boolean checkString(String s); }
+
+class ListExamples implements StringChecker{ // FIXED A
+  public boolean checkString(String s) { // FIXED B
+    if(s.length() > 5){
+      return true;
+    }
+    return false;
+}
+
+  // Returns a new list that has all the elements of the input list for which
+  // the StringChecker returns true, and not the elements that return false, in
+  // the same order they appeared in the input list;
+  static List<String> filter(List<String> list, StringChecker sc) {
+    List<String> result = new ArrayList<>();
+    for(String s: list) {
+      if(sc.checkString(s)) {
+        result.add(s); // FIXED C
+      }
+    }
+    return result;
+  }
+
+  // Takes two sorted list of strings (so "a" appears before "b" and so on),
+  // and return a new list that has all the strings in both list in sorted order.
+  static List<String> merge(List<String> list1, List<String> list2) {
+    List<String> result = new ArrayList<>();
+    int index1 = 0, index2 = 0;
+    while(index1 < list1.size() && index2 < list2.size()) {
+      if(list1.get(index1).compareTo(list2.get(index2)) < 0) {
+        result.add(list1.get(index1));
+        index1 += 1;
+      }
+      else {
+        result.add(list2.get(index2));
+        index2 += 1;
+      }
+    }
+    while(index1 < list1.size()) {
+      result.add(list1.get(index1));
+      index1 += 1;
+    }
+    while(index2 < list2.size()) {
+      result.add(list2.get(index2));
+      index2 += 1; // FIXED D
+    }
+    return result;
+  }
+}
+```
+
+My explanations for the fixes are:
+1. FIXED A: As mentioned before, no implementation of `StringChecker` was found in the code, nor its method `checkString`, making `filter` impossible to be run without a failure. As such, implementing it to this class fixes both of these issues, and as such `filter` can finally be run.
+2. FIXED B: Same as before, this is just the implementation of the method that's required for the `filter` method to work. Without it, the class that implements the `StringChecker` without implementing all of its methods are going to throw an error. With this fix, `filter` will work as desired.
+3. FIXED C: On the original file, it was `result.add(0, s)` instead of `result.add(s)`. This is wrong compared to what's asked for in the javadoc before the method, where it's asking for "the same order they appeared in the input list". The pre-fixed code make it so that it appends to 0 (so basically prepend) while the for loop goes forward, thus reversing the order. Removing the index will make the `.add()` method append it to the end of the list, making it the correct order.
+4. FIXED D: Before the fix, this was `index1 += 1;`, instead of `index2 += 1;`. This is wrong and causes the while loop to go forever since it's checking for `index2 < list2.size()` even though it would be constant without the fix. Making the fix will cause this code to run normally.
+
+## Part 3: Reflection
+
+Throughout these past two weeks, I've learned about a lot of new concepts that I haven't known before, or wasn't sure of. Before week 2, I had some knowledge on how URL works, but I certainly didn't know the detail on what each parts do and what their names are and how to get them from a code. Other than that, I was completely clueless on creating my own server / website, which was something I learned about in Lab 2. Meanwhile, I also got assured about what symptoms, bugs, and failure-inducing inputs are, whereas before the lab (i.e. just after the lecture), I only know them in concept but not yet practiced in real life.
