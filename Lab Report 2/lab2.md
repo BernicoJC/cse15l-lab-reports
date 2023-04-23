@@ -201,6 +201,7 @@ public class ListTests {
   ![Image](Images/mrgsc.png)
 
 4. The bugged code before the fix:
+
 ```
 import java.util.ArrayList;
 import java.util.List;
