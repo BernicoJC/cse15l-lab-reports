@@ -59,6 +59,7 @@ The values that changed after me entering the new URL are:
 
 On this part, I will choose to debug the List Methods part.
 1. One failure inducing input to each of the List Methods are:
+
 ```
 import static org.junit.Assert.*;
 import org.junit.*;
@@ -106,9 +107,11 @@ public class ListTests {
 	}
 }
 ```
+
 Quick note: for the testFilter, it failed because there's simply no StringChecker-implemented-class yet to fill in the `static List<String> filter(List<String> list, StringChecker sc)` `sc` parameter with. However, filling it with null only makes the problem worse as `sc.checkString(s)` is called later. As such, any possible input will be failure-inducing. The comment line ``StringChecker sc = new ListExamples();`` will be used instead and the null will be replaced with `sc`.
 
 2. One input that doesn't cause a failure for each of the List Methods are:
+
 ```
 import static org.junit.Assert.*;
 import org.junit.*;
@@ -255,6 +258,7 @@ class ListExamples {
 ```
 
 The fixed code (labeled for the explanation):
+
 ```
 import java.util.ArrayList;
 import java.util.List;
