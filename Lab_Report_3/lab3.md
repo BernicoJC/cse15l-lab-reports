@@ -215,7 +215,7 @@ This option makes grep prints only the instances of where the keyword is found; 
 ```
 
 ## Max (`-m [n]`)
-This option modifies grep such that it only display the first `n` instances of the keyword given.
+This option modifies grep such that it only display the first `n` instances of the keyword given. Again, I found this command through the `grep --help` command.
 
 1. Code example: `grep -m 3 "admission" stringsearch-data/technical/biomed/cc1477.txt`, which prints the first 3 instances of `"admission"` in the `cc1477.txt` file in the `biomed` folder. This is useful for when you only need some examples of the usage of the word, but you don't want it to potentially display way too many to be fit in the terminal. The output is as below.
 ```
