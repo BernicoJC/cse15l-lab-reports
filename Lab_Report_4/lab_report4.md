@@ -16,16 +16,25 @@ Logging in to the ieng6 server takes almost no time as I'm already well more tha
 PIC2
 
 ## Cloning the Fork
-
+This step also takes almost no time. Since I already know the codes to type, I simply did. Type in `git clone `, and then go to the forked directory from before, click the "Code" symbol on top right of the page's content, click the "SSH" tab, and then copy the link provided. Go back to terminal, and then paste the link to the entered command's argument.
+PIC3_0
+PIC3_1
 
 ## Running the Test (with failure as a result)
-
+After the previous step is done, I inputted `ls` and then `<enter>` to see if the correct directory has been cloned or not. Seeing that it has, I `cd la` and then click `<tab>` to autofill to `cd lab7/`, then click `<enter>`. There, I typed `bash test.sh` and then `<enter>` to run the test, and then showing that it failed a test.
+PIC4
 
 ## Editing the Code
-
+Then, I typed in `vim Lis`, and then `<tab>` to auto complete to `vim ListExamples` and then I typed in `.ja` and then `<tab>` again to auto fill to `vim ListExamples.java`, and then `<enter>`. Then, to edit the file, all I did was type in `?index1` and `<enter>` to search the last `index1` in the file (since I already know which part of the code to be fixed). Then, press `e` to reach the end of the word (the `1`), press `x` to delete it, press `i` to enter insert mode, type `2` so the index is the correct one and then `<esc>` to quit the insert mode, and finally type in `:wq` and then `<enter>` to save and exit the `ListExamples.java` vim. The code is now fixed.
+PIC5
+PIC5_1
+PIC5_2
 
 ## Re-running the Test (with success this time)
-
+This step is almost the same as the step to run the test, that is, I typed `bash test.sh` and then `<enter>` to run the test, and then showing that it didn't fail this time.
+PIC6
 
 ## Committing and Pushing to Github
-
+Finally, I can commit and push to Github. First, I typed in `git add Lis` and then `<tab>`, and then finish `.ja` and then `<tab>` again and then `<enter>` like before to add the file that I changed. Then, I typed `git commit` and then `<enter>`; a vim terminal page will open. I pressed `i` to input mode and typed `Fixing the ListExamples.java file.` to describe what I did; then, click `<esc>` and then `:wq` to save and quit. Finally, enter `git push` and then `<enter>` to push the commit. And then finally, it's done.
+PIC7
+PIC7_1
