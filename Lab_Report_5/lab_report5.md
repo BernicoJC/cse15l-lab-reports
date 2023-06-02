@@ -91,7 +91,7 @@ grading-area/TestListExamples.java:32: error: cannot find symbol
 Your files failed to compile
 ```
 Here is a screenshot of the bit that's probably triggering the bug, since it is where `"Your files failed to compile"` should be printed from.
-![Image](Images/0.png)
+![Image](1.png)
 
 **Detail the failure-inducing input and context. That might mean any or all of the command you're running, a test case, command-line arguments, working directory, even the last few commands you ran. Do your best to provide as much context as you can.**
 The command that I did, as shown above, is `bash grade.sh https://github.com/ucsd-cse15l-f22/list-methods-corrected`. However, I'm pretty sure that it isn't the command-line argument that's causing this as it is the correct version with all of the infrastructures like the `ListExamples.java` file intact. My working directory for the ieng6 run was `[cs15lsp23lr@ieng6-203]:list-examples-grader:510`. I didn't run anything before the run on the ieng6 server, other than the usual `cd` and `ls` commands, along with `git clone ` method to clone the same repository I'm using on local.
