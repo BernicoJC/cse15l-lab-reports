@@ -113,7 +113,7 @@ As for the second part, I think it gave me the answer I needed. Apparently the b
 
 2. The contents of each relevant file before fixing the bug
 grade.sh
-```
+``
 rm -rf student-submission
 rm -rf grading-area
 
@@ -173,9 +173,9 @@ else
     echo 100
 
 fi
-```
+``
 TestListExamples.java
-```
+``
 import static org.junit.Assert.*;
 import org.junit.*;
 import java.util.Arrays;
@@ -212,7 +212,7 @@ public class TestListExamples {
 
 
 }
-```
+``
 
 3. The full command line (or lines) ran to trigger the bug
 The command line done, as said above is `bash grade.sh https://github.com/ucsd-cse15l-f22/list-methods-corrected`, which isn't the one that's causing the bug. Meanwhile, the line that's causing the bug is `javac -cp ".;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar" grading-area/*.java` and, to an extent, `java -cp ".;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore TestListExamples > junit.txt`.
