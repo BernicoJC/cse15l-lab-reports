@@ -108,7 +108,8 @@ As for the second part, I think it gave me the answer I needed. Apparently the b
 
 ### The Extra Information
 1. The file and directory structure needed
-  ![Image](3.png)
+
+![Image](3.png)
 
 2. The contents of each relevant file before fixing the bug
 grade.sh
