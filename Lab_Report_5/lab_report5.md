@@ -11,6 +11,7 @@ MSI Windows Laptop, Windows 10, Chrome, bash terminal / Visual Studio Code
 
 **Detail the symptom you're seeing. Be specific; include both what you're seeing and what you expected to see instead. Screenshots are great, copy-pasted terminal output is also great. Avoid saying “it doesn't work”.**
 Hi, I'm trying to finish off my autograder script and it seemed to be working as intended when I tried to run it on my local terminal, same with local server. This is my intended output.
+
 ```
 $ bash grade.sh https://github.com/ucsd-cse15l-f22/list-methods-corrected
 Cloning into 'student-submission'...
@@ -30,7 +31,9 @@ Out of 4 tests, you failed 3 :
 3) testAlwaysFail2(TestListExamples)
 Your score is 25 out of 100
 ```
+
 Meanwhile, when I tried to run it on the ieng6 server, this output shows up, which shows an error saying the files aren't compiling. This means that I can't even run the java file for starting the server.
+
 ```
 Cloning into 'student-submission'...
 remote: Enumerating objects: 3, done.
@@ -90,6 +93,7 @@ grading-area/TestListExamples.java:32: error: cannot find symbol
 10 errors
 Your files failed to compile
 ```
+
 Here is a screenshot of the bit that's probably triggering the bug, since it is where `"Your files failed to compile"` should be printed from.
 ![Image](1.png)
 
@@ -113,6 +117,7 @@ As for the second part, I think it gave me the answer I needed. Apparently the b
 
 2. The contents of each relevant file before fixing the bug
 grade.sh
+
 ```
 rm -rf student-submission
 rm -rf grading-area
@@ -174,7 +179,9 @@ else
 
 fi
 ```
+
 TestListExamples.java
+
 ```
 import static org.junit.Assert.*;
 import org.junit.*;
