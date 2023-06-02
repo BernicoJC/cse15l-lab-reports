@@ -99,8 +99,10 @@ The command that I did, as shown above, is `bash grade.sh https://github.com/ucs
 ### Leading question / command suggestion
 Hi Bernico, looking over your error message, this seems to be an error with your script trying to run the tester file. Here are a few things that you should check out.
 1. Since you're starting it fresh from the github, maybe your local directory has something set up that isn't yet established in the github repository. Try to check the directory you're running the commands in. In particular, try to make sure that the tester's library folder is in there. You can do this by doing `ls [folder name]` in said directory.
-2. If it still fails, then try to look over your bash script and see if there are any
+2. Try to look over your bash script and remember that the commands to compile java files can be different depending on the platform. Pay close attention to the fact that ieng6 server might be on a different platform than yours.
 
 ### The student's followup and the bug itself
+Hi, thanks for your answer. For the first part, the code I cloned into the ieng6 server is the most up to date one as I pushed the local one into github right before I tried to do it in the server. And as for the directories I'm using to run the java file, the `ls` command gave me this.
+
 
 ### The final TA's answer and information
