@@ -120,7 +120,7 @@ rm -rf grading-area
 mkdir grading-area
 
 git clone $1 student-submission
-echo 'Finished cloning'
+echo "Finished cloning"
 
 find student-submission/ListExamples.java
 
@@ -153,8 +153,8 @@ if [[ $? -eq 0 ]]
     echo "Failures found"
     
     grep -oE "[0-9]+" result.txt > failure_count.txt
-    testsRan=$(grep -m 1 '' failure_count.txt)
-    fails=$(grep -m 2 '' failure_count.txt | sed -n '2p')
+    testsRan=$(grep -m 1 "" failure_count.txt)
+    fails=$(grep -m 2 "" failure_count.txt | sed -n "2p")
     echo "Out of" $testsRan "tests, you failed" $fails ":"
 
     testsRan_Int=$((testsRan))
