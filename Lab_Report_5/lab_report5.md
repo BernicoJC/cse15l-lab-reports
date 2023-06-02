@@ -103,6 +103,126 @@ Hi Bernico, looking over your error message, this seems to be an error with your
 
 ### The student's followup and the bug itself
 Hi, thanks for your answer. For the first part, the code I cloned into the ieng6 server is the most up to date one as I pushed the local one into github right before I tried to do it in the server. And as for the directories I'm using to run the java file, the `ls` command gave me this.
-
+![Image](2.png)
+As for the second part, I think it gave me the answer I needed. Apparently the bug was that the command line location for the tester library I used in my bash script is the one used for Windows, while ieng6 runs on Linux-based terminal. As such, I changed it and I got my intended output. Thanks once again for your help!
 
 ### The final TA's answer and information
+1. The file and directory structure needed
+  ![Image](3.png)
+
+2. The contents of each relevant file before fixing the bug
+grade.sh
+```
+rm -rf student-submission
+rm -rf grading-area
+
+mkdir grading-area
+
+git clone $1 student-submission
+echo 'Finished cloning'
+
+find student-submission/ListExamples.java
+
+# Check if the file is available
+if [[ $? -eq 0 ]]
+    then 
+    echo "File found"
+else  
+    echo "File not found"
+    exit 1
+fi
+
+cp student-submission/ListExamples.java TestListExamples.java grading-area
+cp -r lib grading-area
+
+javac -cp ".;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar" grading-area/*.java
+if [[ $? -eq 0 ]]
+    then 
+    echo "Files compiled succesfully"
+else
+    echo "Your files failed to compile"
+    exit 1
+fi
+
+cd grading-area
+java -cp ".;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore TestListExamples > junit.txt
+
+# Detect if it any tests failed by looking at the JUnit output
+grep "Failures:" junit.txt > result.txt
+if [[ $? -eq 0 ]]
+    then
+    echo "Failures found"
+    # Find the failure count
+    grep -oE "[0-9]+" result.txt > failure_count.txt
+    testsRan=$(grep -m 1 '' failure_count.txt)
+    fails=$(grep -m 2 '' failure_count.txt | sed -n '2p')
+    echo "Out of" $testsRan "tests, you failed" $fails ":"
+
+    # Convert to integer
+    testsRan_Int=$((testsRan))
+    fails_int=$((fails))
+
+    # Pick names of methods that failed 
+    grep ") " junit.txt > tests_failed.txt
+
+    cat "tests_failed.txt"
+
+    # Calculate the score
+    score=$((100 - $fails_int * 100 / $testsRan_Int))
+    echo "Your score is" $score "out of 100"
+
+
+else
+    echo "No errors. All tests passed"
+    echo 100
+
+fi
+```
+TestListExamples.java
+```
+import static org.junit.Assert.*;
+import org.junit.*;
+import java.util.Arrays;
+import java.util.List;
+
+class IsMoon implements StringChecker {
+  public boolean checkString(String s) {
+    return s.equalsIgnoreCase("moon");
+  }
+}
+
+public class TestListExamples {
+  @Test(timeout = 500)
+  public void testMergeRightEnd() {
+    List<String> left = Arrays.asList("a", "b", "c");
+    List<String> right = Arrays.asList("a", "d");
+    List<String> merged = ListExamples.merge(left, right);
+    List<String> expected = Arrays.asList("a", "a", "b", "c", "d");
+    assertEquals(expected, merged);
+  }
+
+  @Test
+  public void testAlwaysFail(){
+    assertFalse(true);
+  }
+  @Test
+  public void testAlwaysFail1(){
+    assertFalse(true);
+  }
+  @Test
+  public void testAlwaysFail2(){
+    assertFalse(true);
+  }
+
+
+}
+```
+
+3. The full command line (or lines) ran to trigger the bug
+The command line done, as said above is `bash grade.sh https://github.com/ucsd-cse15l-f22/list-methods-corrected`, which isn't the one that's causing the bug. Meanwhile, the line that's causing the bug is `javac -cp ".;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar" grading-area/*.java` and, to an extent, `java -cp ".;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore TestListExamples > junit.txt`.
+
+4. A description of what to edit to fix the bug
+What to edit to fix the bug is simple as I simply have to replace the path in the lines for compiling and running the java file to the mac / linux version of the path's format. So, it becomes `javac -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar grading-area/*.java` and `java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore TestListExamples > junit.txt`.
+
+## Reflection
+I have definitely learned a lot throughout the quarter from this class, and its lab sessions in particular. For the actual materials from the course, I think that general terminal command lines and directory manipulating are the most important one that I learned about, along with operating git commands and github. Other than that, vim also comes in handy more time than I expected. Outside of materials however, I think I also learned about the importance of teamwork, as the lab session especially made me realize how much more effective I can be while working with others.
