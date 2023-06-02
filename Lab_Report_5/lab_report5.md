@@ -101,12 +101,12 @@ Hi Bernico, looking over your error message, this seems to be an error with your
 1. Since you're starting it fresh from the github, maybe your local directory has something set up that isn't yet established in the github repository. Try to check the directory you're running the commands in. In particular, try to make sure that the tester's library folder is in there. You can do this by doing `ls [folder name]` in said directory.
 2. Try to look over your bash script and remember that the commands to compile java files can be different depending on the platform. Pay close attention to the fact that ieng6 server might be on a different platform than yours.
 
-### The student's followup and the bug itself
+### The Student's Followup and the Bug Itself
 Hi, thanks for your answer. For the first part, the code I cloned into the ieng6 server is the most up to date one as I pushed the local one into github right before I tried to do it in the server. And as for the directories I'm using to run the java file, the `ls` command gave me this.
 ![Image](2.png)
 As for the second part, I think it gave me the answer I needed. Apparently the bug was that the command line location for the tester library I used in my bash script is the one used for Windows, while ieng6 runs on Linux-based terminal. As such, I changed it and I got my intended output. Thanks once again for your help!
 
-### The final TA's answer and information
+### The Extra Information
 1. The file and directory structure needed
   ![Image](3.png)
 
